@@ -118,6 +118,13 @@
   set text(size: 48pt)
   show link: underline
 
+  // Touying の #pause をリストの途中で使うと、内部的には表示済みの項目と未表示の項目とで
+  // 別々のリストに分割される。デフォルトではリスト間のマージンと項目間のマージンが一致しないため、
+  // 最後のスライド (すべての項目が表示されているため、分割がなくなり 1 つのリストに戻る) でテキストがズレる。
+  // これを防ぐため、リスト間のマージンを項目間のマージンに揃える。
+  show list: set block(spacing: 0.65em)
+  show enum: set block(spacing: 0.65em)
+
   show: touying-slides.with(
     config-page(
       paper: "presentation-" + aspect-ratio,
