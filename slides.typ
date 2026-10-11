@@ -1,56 +1,14 @@
 #import "@preview/touying:0.7.3": *
+#import "@preview/cjk-unbreak:0.2.3": remove-cjk-break-space
 #import "@preview/codly:1.3.0": *
-#import "@preview/cjk-unbreak:0.2.3": remove-cjk-break-space, transform-childs
+#import "@preview/cetz:0.5.2"
+#import "@preview/cetz-plot:0.1.4": plot
 #import "setoka.typ": *
 
 #show: codly-init.with()
 
 #show: remove-cjk-break-space
 
-#let plugin_tokenize_ja_uninitialized = plugin("plugins/tokenize-ja/tokenize-ja.wasm")
-#let plugin_tokenize_ja = plugin.transition(plugin_tokenize_ja_uninitialized.init)
-
-#let tokenize(s) = {
-  cbor(plugin_tokenize_ja.tokenize(bytes(s)))
-}
-
-#let get-inner-str(e) = {
-  if e.func() == text {
-    if e.has("text") {
-      e.text
-    } else if e.has("body") {
-      e.body
-    } else {
-      none
-    }
-  } else {
-    none
-  }
-}
-
-#let make-助詞-small(rest) = {
-  rest = transform-childs(rest, make-助詞-small)
-  if utils.is-sequence(rest) {
-    for child in rest.children {
-      let s = get-inner-str(child)
-      if s != none {
-        for t in tokenize(s) {
-          if t.at(1) == "助詞" {
-            [#set text(size: 0.9em);#t.at(0)]
-          } else {
-            t.at(0)
-          }
-        }
-      } else {
-        child
-      }
-    }
-  } else {
-    rest
-  }
-}
-
-#show: make-助詞-small
 
 #show: setoka-theme.with(
   aspect-ratio: "16-9",
@@ -58,7 +16,7 @@
     title: [
       TODO
     ],
-    subtitle: [PHP 勉強会\@東京 第 TODO 回],
+    subtitle: [],
     author: [nsfisis (いまむら)],
     date: datetime(year: 3000, month: 1, day: 1),
   ),
@@ -78,13 +36,10 @@
 
 #about-slide()
 
-TODO
-
 ---
 
 #[
   #set align(center + horizon)
 
-  ご静聴 \
-  ありがとうございました
+  TODO
 ]
