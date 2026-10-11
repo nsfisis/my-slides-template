@@ -9,7 +9,6 @@
 
 #show: remove-cjk-break-space
 
-
 #show: setoka-theme.with(
   aspect-ratio: "16-9",
   config-info(
@@ -30,7 +29,8 @@
   })
 )
 
-#set text(font: "Noto Sans CJK JP", lang: "ja")
+#set text(font: "BIZ UDPGothic", lang: "ja")
+#show raw: set text(font: "UDEV Gothic 35")
 
 #title-slide()
 
